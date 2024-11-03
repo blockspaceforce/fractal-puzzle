@@ -1,5 +1,11 @@
 # Fractal Puzzle CLI
 
+```bash
+packages
+├── cli               # <--- here
+├── smartcontracts
+```
+
 ## Install dependencies
 
 ```bash
@@ -19,7 +25,7 @@ UNISAT_API_KEY=<your unisat api key>
 
 ## Deploy the contract
 
-You can deploy the contract by running the following command (in the project root directory):
+You can deploy the contract by running the following command (in the `cli` directory):
 
 ```console
 $ bun cli puzzle deploy
@@ -31,7 +37,7 @@ $ bun cli puzzle deploy
 
 ## Solve the puzzle and get the reward
 
-You can solve the puzzle and get the reward by running the following command (in the project root directory):
+You can solve the puzzle and get the reward by running the following command (in the `cli` directory):
 
 ```console
 $ bun cli puzzle solve

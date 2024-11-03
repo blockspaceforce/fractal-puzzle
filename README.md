@@ -17,7 +17,7 @@ Fractal Puzzle is a simple example project designed to demonstrate the combinati
 
 This project is designed to run on macOS and Linux.
 
-On macOS with Apple Silicon, make sure [Rosetta](https://support.apple.com/en-us/HT211861) is installed.
+On macOS with Apple Silicon(M1, M2, etc.), make sure [Rosetta](https://support.apple.com/en-us/HT211861) is installed.
 
 ```bash
 softwareupdate --install-rosetta --agree-to-license
@@ -54,20 +54,36 @@ cd fractal-puzzle
 
 ### Smart Contract
 
+```bash
+packages
+├── cli
+├── smartcontracts   # <--- here
+```
+
 Go to the [smartcontracts](./packages/smartcontracts) directory and run the following command to compile the contract:
 
 ```bash
+# go to smartcontracts directory from project root
+cd packages/smartcontracts
 bun install
-npx scrypt-cli@latest compile
+bunx scrypt-cli@latest compile
 ```
 
 ### Command Line Interface
+
+```bash
+packages
+├── cli                # <--- here
+├── smartcontracts
+```
 
 Go to the [cli](./packages/cli) directory and run the following steps to deploy and solve the puzzle.
 
 #### Install dependencies
 
 ```bash
+# go to cli directory from project root
+cd packages/cli
 bun install
 ```
 
@@ -77,14 +93,14 @@ Copy the `.env.example` file to `.env` and set the environment variables.
 
 ```
 PRIVATE_KEY=<your private key in WIF format>
-UNISAT_BASE_URL=https://open-api-fractal.unisat.io # mainnet
-# UNISAT_BASE_URL=https://open-api-fractal-testnet.unisat.io # testnet
+# UNISAT_BASE_URL=https://open-api-fractal.unisat.io # mainnet
+UNISAT_BASE_URL=https://open-api-fractal-testnet.unisat.io # testnet
 UNISAT_API_KEY=<your unisat api key>
 ```
 
 #### Deploy the contract
 
-You can deploy the contract by running the following command (in the project root directory):
+You can deploy the contract by running the following command (in the `cli` directory):
 
 ```console
 $ bun cli puzzle deploy
@@ -96,7 +112,7 @@ $ bun cli puzzle deploy
 
 #### Solve the puzzle and get the reward
 
-You can solve the puzzle and get the reward by running the following command (in the project root directory):
+You can solve the puzzle and get the reward by running the following command (in the `cli` directory):
 
 ```console
 $ bun cli puzzle solve
@@ -121,6 +137,10 @@ bun cli wallet generate
 ## Advanced
 
 ## FAQ
+
+### How to get puzzle UTXO?
+
+If you
 
 ## Todo
 
