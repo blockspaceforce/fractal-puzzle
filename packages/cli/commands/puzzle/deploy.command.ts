@@ -21,21 +21,25 @@ export const deployCommand = async (argv: any) => {
     console.error(amountError)
     return
   }
+  try {
+    const { txid, txHex } = await deploy({ secret, amount })
+    console.log(chalk.green(`Transaction ID: ${txid}`))
+    console.log(chalk.blue(`Transaction Hex: ${txHex}`))
 
-  const { txid, txHex } = await deploy({ secret, amount })
-
-  console.log(chalk.green(`Transaction ID: ${txid}`))
-  console.log(chalk.blue(`Transaction Hex: ${txHex}`))
-
-  const broadcastNow = prompt("Broadcast now? (y/N):")
-  if (broadcastNow === 'y') {
-    const result = await broadcastTx(txHex)
-    if (result.code === 0) {
-      console.log(chalk.green(`Broadcasted: ${result.data}`))
+    const broadcastNow = prompt("Broadcast now? (y/N):")
+    if (broadcastNow === 'y') {
+      const result = await broadcastTx(txHex)
+      if (result.code === 0) {
+        console.log(chalk.green(`Broadcasted: ${result.data}`))
+      } else {
+        console.error(chalk.red(`Broadcast failed, message: ${result.msg}`))
+      }
     } else {
-      console.error(chalk.red(`Broadcast failed, message: ${result.msg}`))
+      console.log(chalk.yellow('Bye!'))
     }
-  } else {
-    console.log(chalk.yellow('Bye!'))
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error)
+    console.error(message)
+    return
   }
 }
