@@ -152,6 +152,10 @@ After deploying the puzzle contract, you can view the transaction in a blockchai
 - [Unisat Explorer(Mainnet)](https://fractal.unisat.io/explorer)
 - [Unisat Explorer(Testnet)](https://fractal-testnet.unisat.io/explorer)
 
+### How to change the fee rate?
+
+The current version does not support the fee rate feature yet and only allows setting a fixed fee. If you want to change the default value, you can modify the `FEE` field in `packages/cli/libs/constants.ts`.
+
 ## Todo
 
 - [ ] support fee rate
