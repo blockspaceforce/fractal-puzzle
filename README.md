@@ -76,7 +76,7 @@ bun install
 Copy the `.env.example` file to `.env` and set the environment variables.
 
 ```
-PRIVATE_KEY=<your private key>
+PRIVATE_KEY=<your private key in WIF format>
 UNISAT_BASE_URL=https://open-api-fractal.unisat.io # mainnet
 # UNISAT_BASE_URL=https://open-api-fractal-testnet.unisat.io # testnet
 UNISAT_API_KEY=<your unisat api key>
@@ -87,12 +87,10 @@ UNISAT_API_KEY=<your unisat api key>
 You can deploy the contract by running the following command (in the project root directory):
 
 ```console
-$ bun cli deploy
-> Enter your secret(4 characters minimum): <hello>
-> Enter amount(> 546 satoshis): <1000>
-> Transaction ID: <txid>
-> Transaction Hex: <txHex>
-> Broadcast now? (y/N): y
+$ bun cli puzzle deploy
+> Enter your secret(4 characters minimum): [hello]
+> Enter amount(> 546 satoshis): [1000]
+> Broadcast now? (y/N): [y]
 > Broadcasted: <txid>
 ```
 
@@ -101,11 +99,23 @@ $ bun cli deploy
 You can solve the puzzle and get the reward by running the following command (in the project root directory):
 
 ```console
-$ bun cli solve
-> Enter your secret(4 characters minimum): <hello>
-> Enter your utxo address: <utxo address>
-> Broadcast now? (y/N): y
+$ bun cli puzzle solve
+> Enter your secret(4 characters minimum): [hello]
+> Enter your utxo address: [utxo address]
+> Broadcast now? (y/N): [y]
 > Broadcasted: <txid>
+```
+
+#### Wallet Management
+
+You can manage your wallet by running the following command:
+
+```bash
+# show current wallet
+bun cli wallet current
+
+# generate a new wallet
+bun cli wallet generate
 ```
 
 ## Advanced

@@ -1,9 +1,9 @@
 {
   "name": "puzzle",
-  "module": "index.ts",
+  "module": "cli.ts",
   "type": "module",
   "scripts": {
-    "cli": "bun index.ts"
+    "cli": "bun cli.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",

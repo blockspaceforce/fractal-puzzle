@@ -1,14 +1,14 @@
 import * as bitcoin from "bitcoinjs-lib"
-import { loadWalletFromPrivateKey } from "../libs/wallet"
-import { getUtxos } from "../libs/unisat"
-import { Puzzle } from "../../smartcontracts/src"
+import { loadWalletFromWIF } from "../../libs/wallet"
+import { getUtxos } from "../../libs/unisat"
+import { Puzzle } from "../../../smartcontracts/src"
 import { toByteString, sha256, type MethodCallOptions } from 'scrypt-ts'
 import { LEAF_VERSION_TAPSCRIPT } from "bitcoinjs-lib/src/payments/bip341"
-import { getDummySigner, getDummyUTXO } from "../libs/dummy"
-import { callToBufferList, issue_xonly_pubkey } from "../libs/tx"
+import { getDummySigner, getDummyUTXO } from "../../libs/dummy"
+import { callToBufferList, issue_xonly_pubkey } from "../../libs/tx"
 import type { TapLeafScript } from "bip174"
-import { pickUtxos } from "../libs/utxo"
-import { buildPuzzleFinalizer } from "../libs/finalizer"
+import { pickUtxos } from "../../libs/utxo"
+import { buildPuzzleFinalizer } from "../../libs/finalizer"
 
 async function getPuzzleContract(secret: string) {
   const contract = new Puzzle(sha256(toByteString(secret, true)))
@@ -24,7 +24,7 @@ export async function solve(props: { utxoAddress: string, secret: string }) {
   const utxos = await getUtxos(utxoAddress)
   const utxo = pickUtxos(utxos, fee)
 
-  const wallet = loadWalletFromPrivateKey(process.env.PRIVATE_KEY!, bitcoin.networks.bitcoin)
+  const wallet = loadWalletFromWIF(process.env.PRIVATE_KEY!, bitcoin.networks.bitcoin)
 
   const puzzleContract = await getPuzzleContract(secret)
   const leafScript = puzzleContract.lockingScript.toBuffer()

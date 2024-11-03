@@ -43,10 +43,14 @@ export function loadWalletFromPrivateKey(privateKey: string, network: bitcoin.Ne
   return createWallet(keyPair, network);
 }
 
+export function loadWalletFromWIF(wif: string, network: bitcoin.Network) {
+  const keyPair = ecpair.fromWIF(wif);
+  return createWallet(keyPair, network);
+}
+
 export function loadWalletFromMnemonic(mnemonic: string, path: string, network: bitcoin.Network) {
   const seed = bip39.mnemonicToSeedSync(mnemonic);
   const root = bip32.fromSeed(seed, network);
   const child = root.derivePath(path);
-  const privateKey = Buffer.from(child.privateKey!).toString('hex');
-  return loadWalletFromPrivateKey(privateKey, network);
+  return loadWalletFromWIF(child.toWIF(), network);
 }

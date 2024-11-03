@@ -1,18 +1,18 @@
 import * as bitcoin from 'bitcoinjs-lib';
-import { loadWalletFromPrivateKey } from '../libs/wallet';
-import { getUtxos } from '../libs/unisat';
-import { pickUtxos } from '../libs/utxo';
-import { Puzzle } from '../../smartcontracts/src';
+import { loadWalletFromWIF } from '../../libs/wallet';
+import { getUtxos } from '../../libs/unisat';
+import { pickUtxos } from '../../libs/utxo';
+import { Puzzle } from '../../../smartcontracts/src';
 import { toByteString, sha256 } from 'scrypt-ts'
-import { issue_xonly_pubkey } from '../libs/tx';
-import { DUST_LIMIT, FEE } from '../libs/constants';
+import { issue_xonly_pubkey } from '../../libs/tx';
+import { DUST_LIMIT, FEE } from '../../libs/constants';
 
 export async function deploy(props: { secret: string, amount: number }) {
   const { secret, amount } = props
   const fee = FEE
   const contract = new Puzzle(sha256(toByteString(secret, true)))
 
-  const wallet = loadWalletFromPrivateKey(process.env.PRIVATE_KEY!, bitcoin.networks.bitcoin)
+  const wallet = loadWalletFromWIF(process.env.PRIVATE_KEY!, bitcoin.networks.bitcoin)
 
   const scriptPubKey = bitcoin.payments.p2tr({
     internalPubkey: issue_xonly_pubkey,
