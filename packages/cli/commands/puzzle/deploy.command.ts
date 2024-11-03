@@ -39,7 +39,7 @@ export const deployCommand = async (argv: any) => {
     }
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error)
-    console.error(message)
+    console.error(chalk.red(message))
     return
   }
 }

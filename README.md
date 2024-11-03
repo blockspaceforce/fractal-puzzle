@@ -89,9 +89,18 @@ bun install
 
 #### Set the environment variables
 
-Copy the `.env.example` file to `.env` and set the environment variables.
+Copy the `env.example` file to `.env` and set the environment variables.
 
+```bash
+cp env.example .env
+
+# edit .env file
+vim .env
 ```
+
+The `.env` file should look like this:
+
+```env
 PRIVATE_KEY=<your private key in WIF format>
 # UNISAT_BASE_URL=https://open-api-fractal.unisat.io # mainnet
 UNISAT_BASE_URL=https://open-api-fractal-testnet.unisat.io # testnet
