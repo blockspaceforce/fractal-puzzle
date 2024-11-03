@@ -143,13 +143,14 @@ bun cli wallet current
 bun cli wallet generate
 ```
 
-## Advanced
-
 ## FAQ
 
 ### How to get puzzle UTXO?
 
-If you
+After deploying the puzzle contract, you can view the transaction in a blockchain explorer. There will be 2 outputs, and the new address that does not belong to your wallet address is the puzzle's UTXO.
+
+- [Unisat Explorer(Mainnet)](https://fractal.unisat.io/explorer)
+- [Unisat Explorer(Testnet)](https://fractal-testnet.unisat.io/explorer)
 
 ## Todo
 
