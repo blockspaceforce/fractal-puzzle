@@ -7,7 +7,7 @@ export function pickUtxos(utxos: UTXO[], minSatoshi: number) {
     .filter((utxo) => utxo.inscriptions.length === 0)
 
   if (selectedUtxos.length === 0) {
-    throw new Error("No utxos found")
+    throw new Error(`Cannot find a utxo with enough balance (>= ${minSatoshi} satoshis)`)
   }
 
   return selectedUtxos[0];

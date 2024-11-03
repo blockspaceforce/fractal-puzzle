@@ -20,19 +20,24 @@ export const solveCommand = async (argv: any) => {
     return
   }
 
-  const { txid, txHex } = await solve({ utxoAddress, secret })
-  console.log(chalk.green(`Transaction ID: ${txid}`))
-  console.log(chalk.blue(`Transaction Hex: ${txHex}`))
+  try {
+    const { txid, txHex } = await solve({ utxoAddress, secret })
+    console.log(chalk.green(`Transaction ID: ${txid}`))
+    console.log(chalk.blue(`Transaction Hex: ${txHex}`))
 
-  const broadcastNow = prompt("Broadcast now? (y/N):")
-  if (broadcastNow === 'y') {
-    const result = await broadcastTx(txHex)
-    if (result.code === 0) {
-      console.log(chalk.green(`Broadcasted: ${result.data}`))
+    const broadcastNow = prompt("Broadcast now? (y/N):")
+    if (broadcastNow === 'y') {
+      const result = await broadcastTx(txHex)
+      if (result.code === 0) {
+        console.log(chalk.green(`Broadcasted: ${result.data}`))
+      } else {
+        console.error(chalk.red(`Broadcast failed, message: ${result.msg}`))
+      }
     } else {
-      console.error(chalk.red(`Broadcast failed, message: ${result.msg}`))
+      console.log('Bye!')
     }
-  } else {
-    console.log('Bye!')
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error)
+    console.error(message)
   }
 }
