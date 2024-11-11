@@ -66,7 +66,7 @@ Go to the [smartcontracts](./packages/smartcontracts) directory and run the foll
 # go to smartcontracts directory from project root
 cd packages/smartcontracts
 bun install
-bunx scrypt-cli@latest compile
+npx scrypt-cli@latest compile
 ```
 
 ### Command Line Interface
